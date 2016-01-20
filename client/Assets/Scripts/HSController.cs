@@ -72,6 +72,8 @@ public class HSController : MonoBehaviour
 			jsonResult = JSON.Parse (hs_get.text);
 
 			if (jsonResult.Count != 0) {
+				int position = 1;
+
 				foreach (JSONNode item in jsonResult.AsArray) {
 
 					GameObject newRowRankScore = Instantiate (globalGameObject, transform.position, transform.rotation) as GameObject;
@@ -79,6 +81,9 @@ public class HSController : MonoBehaviour
 
 					Texture2D countryTexture;
 					foreach (Transform child in newRowRankScore.transform) {
+						if (child.tag == "RankPosition") {
+							child.gameObject.GetComponent<Text> ().text = position.ToString ()+".";
+						}
 						if (child.tag == "RankName") {
 							child.gameObject.GetComponent<Text> ().text = item [0].Value;
 						}
@@ -90,6 +95,7 @@ public class HSController : MonoBehaviour
 							child.gameObject.GetComponent<Text> ().text = item [1].Value;
 						}
 					}
+					position++;
 					newRowRankScore.transform.SetParent (groupLayout.transform);
 				}
 			}

@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour {
 	
 	public Text mainScoreDisplay;
 	public Text mainTimerDisplay;
-
+	public Text gameOverText;
+	public GameObject TimerBox;
 	public GameObject gameOverScoreOutline;
 
 	public AudioSource musicAudioSource;
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour {
 
 			// init scoreboard to 0
 			mainScoreDisplay.text = "0";
+			gameOverText.gameObject.SetActive (false);
 
 			// inactivate the gameOverScoreOutline gameObject, if it is set
 			if (gameOverScoreOutline)
@@ -104,12 +106,10 @@ public class GameManager : MonoBehaviour {
 
 		mainTimerDisplay.text = "GAME OVER";
 
-		if (gameOverScoreOutline)
-			gameOverScoreOutline.SetActive (true);
-
-		if (mainScoreDisplay.text != "0") {
+		if (int.Parse(mainScoreDisplay.text) > 0) {
 			scoreboardText.text = mainScoreDisplay.text;
 			mainScoreDisplay.gameObject.SetActive (false);
+			TimerBox.gameObject.SetActive (false);
 			mainTimerDisplay.gameObject.SetActive (false);
 			gameOverScoreOutline.gameObject.SetActive (false);
 			scoreboardCanvas.gameObject.SetActive (true);
@@ -118,7 +118,13 @@ public class GameManager : MonoBehaviour {
 
 
         } else {
-			
+			gameOverText.gameObject.SetActive (true);
+			mainScoreDisplay.gameObject.transform.parent.gameObject.SetActive(false);
+			mainScoreDisplay.gameObject.SetActive (false);
+			TimerBox.gameObject.SetActive (false);
+			mainTimerDisplay.gameObject.SetActive (false);
+			gameOverScoreOutline.gameObject.SetActive (false);
+
 			if (playAgainButtons)
 				playAgainButtons.SetActive (true);
 

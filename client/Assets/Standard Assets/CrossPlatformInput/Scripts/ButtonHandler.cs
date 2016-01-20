@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
@@ -16,6 +16,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public string Name;
 
+		public Text shotButton;
         void OnEnable()
         {
 
@@ -23,6 +24,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public void SetDownState()
         {
+			shotButton.color = Color.black;
             //CrossPlatformInputManager.SetButtonDown(Name);
 			// Detect if fire button is pressed
 			//if (CrossPlatformInputManager.GetButtonDown ("FireButton"))
@@ -62,6 +64,7 @@ namespace UnityStandardAssets.CrossPlatformInput
         public void SetUpState()
         {
             CrossPlatformInputManager.SetButtonUp(Name);
+			shotButton.color = new Color (1f,1f,1f,0.27f);
         }
 
 

@@ -4,7 +4,8 @@ using System.Collections;
 public class TargetBehavior : MonoBehaviour
 {
 	
-	public int scoreAmount = 0;
+	public int scoreAmountMin = 0;
+	public int scoreAmountMax = 0;
 	public float timeAmount = 0.0f;
 	
 	public GameObject explosionPrefab;
@@ -20,7 +21,7 @@ public class TargetBehavior : MonoBehaviour
 			if (explosionPrefab) {
 				Instantiate (explosionPrefab, transform.position, transform.rotation);
 			}
-			
+			int scoreAmount = Random.Range (scoreAmountMin, scoreAmountMax);
 			if (GameManager.gm) {
 				GameManager.gm.targetHit (scoreAmount, timeAmount);
 			}
