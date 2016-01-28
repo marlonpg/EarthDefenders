@@ -12,6 +12,7 @@ public class SendScript : MonoBehaviour
     public Canvas inputCanvas;
     public Text textName;
     public Text textScore;
+	private bool sendScoreEnabled = true;
     // Use this for initialization
     void Start()
     {
@@ -26,26 +27,27 @@ public class SendScript : MonoBehaviour
 
     public void PostScore()
     {
-		Advertisement.Initialize("1029906", true);
-        //Analytics.Transaction("12345abcde", 0.99m, "USD", null, null);
-        //Gender gender = Gender.Female;
-        //Analytics.SetUserGender(gender);
+		if (sendScoreEnabled) {
+			sendScoreEnabled = false;
+			Advertisement.Initialize ("1029906", true);
 
-        //int birthYear = 2014;
-        //Analytics.SetUserBirthYear(birthYear);
+			//Example how to use Analytics
+			//Analytics.Transaction("12345abcde", 0.99m, "USD", null, null);
+			//Gender gender = Gender.Female;
+			//Analytics.SetUserGender(gender);
+			//int birthYear = 2014;
+			//Analytics.SetUserBirthYear(birthYear);
 
-        StartCoroutine(ShowAdWhenReady());
+			StartCoroutine (ShowAdWhenReady ());
 
-
-        int totalPoints = int.Parse(textScore.text);
-        string name = textName.text;
-        Analytics.CustomEvent("gameOver", new Dictionary<string, object>
-          {
-            { "totalPoints", totalPoints},
-            { "name", name }
-          });
-        inputCanvas.gameObject.GetComponent<HSController>().callPostScores(textName.text, int.Parse(textScore.text));
-
+			int totalPoints = int.Parse (textScore.text);
+			string name = textName.text;
+			Analytics.CustomEvent ("gameOver", new Dictionary<string, object> {
+				{ "totalPoints", totalPoints },
+				{ "name", name }
+			});
+			inputCanvas.gameObject.GetComponent<HSController> ().callPostScores (textName.text, int.Parse (textScore.text));
+		}
     }
     IEnumerator ShowAdWhenReady()
     {

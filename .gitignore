@@ -23,6 +23,7 @@ ExportedObj/
 *.svd
 *.DS_store
 *.pfx
+*.keystore
 Thumbs.db.meta
 
 # Unity3D generated meta files
