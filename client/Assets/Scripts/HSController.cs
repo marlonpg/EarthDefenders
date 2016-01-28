@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class HSController : MonoBehaviour
 {
-	private string secretKey = "PutYouRSecurityCode";
+	private string secretKey = "yousecuritycode";
 	private string game = "earthdefenders";
 	public string addScoreURL = "http://127.0.0.1/RankSystem/api/score/";
 	public string highscoreURL = "http://127.0.0.1/RankSystem/api/rank/10";
@@ -29,6 +29,9 @@ public class HSController : MonoBehaviour
 
 	IEnumerator PostScores(string name, int score)
 	{
+		if (string.IsNullOrEmpty(name)) {
+			name = "anonymous";
+		}
 		System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
 		byte[] bytes = ue.GetBytes(name + score + secretKey);
 
@@ -44,6 +47,7 @@ public class HSController : MonoBehaviour
 
 		string hashString2 = hashString.PadLeft(32, '0');
 		var countrycode = PlayerPrefs.GetString (COUNTRYCODE); //WWW.EscapeURL(name) 
+
 		string post_url = addScoreURL + game + "?name=" + WWW.EscapeURL(name)  + "&score=" + score + "&hash=" + hashString2 + "&countrycode=" + countrycode;
 
 		WWW hs_post = new WWW(post_url);
