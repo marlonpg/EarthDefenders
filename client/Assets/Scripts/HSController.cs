@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class HSController : MonoBehaviour
 {
-	private string secretKey = "yousecuritycode";
+	private string secretKey = "mygamerankingsecuritycode";
 	private string game = "earthdefenders";
 	public string addScoreURL = "http://127.0.0.1/RankSystem/api/score/";
 	public string highscoreURL = "http://127.0.0.1/RankSystem/api/rank/10";
@@ -92,7 +92,8 @@ public class HSController : MonoBehaviour
 							child.gameObject.GetComponent<Text> ().text = item [0].Value;
 						}
 						if (child.tag == "RankCountryFlag") {
-                            countryTexture = Resources.Load ("Flags/" + item [2].Value) as Texture2D;
+							Debug.Log (item [2].Value);
+                            countryTexture = Resources.Load ("Flags/" + item [3].Value) as Texture2D;
 							child.gameObject.GetComponent<RawImage> ().texture = countryTexture;
 						}
 						if (child.tag == "RankScore") {

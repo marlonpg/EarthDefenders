@@ -29,7 +29,7 @@ public class SendScript : MonoBehaviour
     {
 		if (sendScoreEnabled) {
 			sendScoreEnabled = false;
-			Advertisement.Initialize ("1029906", true);
+			Advertisement.Initialize ("1029906", false);
 
 			//Example how to use Analytics
 			//Analytics.Transaction("12345abcde", 0.99m, "USD", null, null);
